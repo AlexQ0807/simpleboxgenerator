@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86" />
+    <title>Simple Box Generator</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>    
+</head>
+<body>
+    <div>
+        <h2>Simple Box Generator</h2>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td><label for="boxcolor">Box Color:</label></td>
+                <td><input type="color" id="boxcolor" name="boxcolor" value="#e66465"></td>
+            </tr>
+            <tr>
+                <td><label for="boxwidth">Box Width (px): </label></td>
+                <td><input type="number" id="boxwidth" name="boxwidth" min="1" max="5000" value="640" placeholder="max=5000"></td>
+            </tr>
+            <tr>
+                <td><label for="boxheight">Box Height (px): </label></td>
+                <td><input type="number" id="boxheight" name="boxheight" min="1" max="5000" value="360" placeholder="max=5000"></td>
+            </tr>
+            <tr>
+                <td><button onclick="generateBox()">Generate</button> </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <hr />
+
+    <div>
+        <span hidden id="mybox-label">Your box (HTML):</span>
+        <div id="mybox"></div>
+    </div>
+
+    <div>
+        <span hidden id="mybox-image-label">Your box (Image):</span>
+        <div id="mybox-image"></div>
+    </div>
+    <script>
+        document.body.style.margin = "1em 2em 1em 2em";
+        
+        const numValueIsValid = (val, min, max) => {
+            return !isNaN(val) &&  (parseInt(val) >= parseInt(min)) && (parseInt(val) <= parseInt(max))
+        }
+
+        const generateBox = () => {
+            let boxElementStyle = document.getElementById("mybox").style;
+            let boxColor = document.getElementById("boxcolor").value;
+            
+            let boxWidth = document.getElementById("boxwidth").value;
+            let boxWidthMin = document.getElementById("boxwidth").min;
+            let boxWidthMax = document.getElementById("boxwidth").max;
+            const isValidWidth = numValueIsValid(boxWidth, boxWidthMin, boxWidthMax);
+
+            let boxHeight = document.getElementById("boxheight").value;
+            let boxHeightMin = document.getElementById("boxheight").min;
+            let boxHeightMax = document.getElementById("boxheight").max;
+            const isValidHeight = numValueIsValid(boxHeight, boxHeightMin, boxHeightMax);
+
+
+            if(isValidWidth && isValidHeight){
+                document.getElementById("mybox-label").hidden = false;
+                boxElementStyle.width = `${boxWidth}px`;
+                boxElementStyle.height = `${boxHeight}px`;
+                boxElementStyle.backgroundColor = `${boxColor}`;
+
+                document.getElementById("mybox-image-label").hidden = false;
+                createImage();
+            }
+            
+        }
+
+        const createImage = () => {
+            html2canvas(document.getElementById("mybox")).then(function(canvas) {
+                let myboxImage = document.getElementById("mybox-image");
+                myboxImage.hasChildNodes() ? myboxImage.removeChild(myboxImage.firstChild): null;
+                myboxImage.appendChild(canvas);
+            });
+        }
+    </script>
+</body>
+</html>
