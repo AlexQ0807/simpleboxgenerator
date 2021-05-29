@@ -1,0 +1,26 @@
+{
+  "name": "simpleboxgenerator",
+  "version": "1.0.0",
+  "description": "Generate a box with a given color and dimension (in px).",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexQ0807/simpleboxgenerator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexQ0807/simpleboxgenerator/issues"
+  },
+  "homepage": "https://github.com/AlexQ0807/simpleboxgenerator#readme"
+}
